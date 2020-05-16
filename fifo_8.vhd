@@ -1,6 +1,6 @@
 LIBRARY IEEE;
 	USE IEEE.std_logic_1164.ALL;
-	USE IEEE>std_logic_unsigned.ALL;
+	USE IEEE.std_logic_unsigned.ALL;
 
 ENTITY fifo_8 IS
 	GENERIC (
@@ -54,20 +54,20 @@ ARCHITECTURE Behavioral OF fifo_8 IS
       	);
 	END COMPONENT;
 
-	SIGNAL D_in  :IN std_logic_vector (7 downto 0);
-	SIGNAL	ADDRA  :IN std_logic_vector (2 downto 0);
-	SIGNAL	ADDRB  :IN std_logic_vector (2 downto 0);
-	SIGNAL	REA  :IN std_logic;	--ReadEnable
-	SIGNAL	WEA  :IN std_logic;	--WriteEnable
-	SIGNAL	CLKA  :IN std_logic;
-	SIGNAL	CLKB  :IN std_logic;
-	SIGNAL	D_out : OUT std_logic_vector (7 downto 0);
-	SIGNAL	count_out: out std_logic_vector (3 downto 0); 
-	SIGNAL	En: in std_logic;
-	SIGNAL	Clock: in std_logic;
-	SIGNAL	Reset: in std_logic;
-        SIGNAL 	gray_in : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
-        SIGNAL  bin_out : OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
+	SIGNAL D_in  : std_logic_vector (7 downto 0);
+	SIGNAL	ADDRA  : std_logic_vector (2 downto 0);
+	SIGNAL	ADDRB  : std_logic_vector (2 downto 0);
+	SIGNAL	REA  : std_logic;	--ReadEnable
+	SIGNAL	WEA  : std_logic;	--WriteEnable
+	SIGNAL	CLKA  : std_logic;
+	SIGNAL	CLKB  : std_logic;
+	SIGNAL	D_out : std_logic_vector (7 downto 0);
+	SIGNAL	count_out: std_logic_vector (3 downto 0); 
+	SIGNAL	En: std_logic;
+	SIGNAL	Clock: std_logic;
+	SIGNAL	ResetGray: std_logic;
+        SIGNAL 	gray_in : STD_LOGIC_VECTOR(3 DOWNTO 0);
+        SIGNAL  bin_out : STD_LOGIC_VECTOR(3 DOWNTO 0);
 
 
 BEGIN
