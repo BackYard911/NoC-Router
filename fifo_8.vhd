@@ -38,41 +38,53 @@ ARCHITECTURE Behavioral OF fifo_8 IS
 		 );
 	END COMPONENT;
 
- 	COMPONENT Gray_counter IS
+	COMPONENT fifo_control IS 
+	GENERIC (
+		address_width :INTEGER := 3 );	
 	PORT(
-		count_out: out std_logic_vector (3 downto 0); 
-		En: in std_logic;
-		Clock: in std_logic;
-		Reset: in std_logic
-	      );
-	END COMPONENT;
+		reset :IN std_logic;
+		rdclk :IN std_logic;
+		wrclk :IN std_logic;
+		r_req :IN std_logic;
+		w_req :IN std_logic;
+		write_valid :OUT std_logic;
+		read_valid :OUT std_logic;
+		wr_ptr :OUT std_logic_vector (address_width-1 DOWNTO 0);
+		rd_ptr :OUT std_logic_vector (address_width-1 DOWNTO 0);
+		empty :OUT std_logic;
+		full :OUT std_logic );
+	END COMPONENT;	
 
-	COMPONENT gbConverter IS
-	PORT (
-            gray_in : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
-            bin_out : OUT STD_LOGIC_VECTOR(3 DOWNTO 0)
-      	);
-	END COMPONENT;
-
-	SIGNAL D_in  : std_logic_vector (7 downto 0);
-	SIGNAL	ADDRA  : std_logic_vector (2 downto 0);
-	SIGNAL	ADDRB  : std_logic_vector (2 downto 0);
-	SIGNAL	REA  : std_logic;	--ReadEnable
-	SIGNAL	WEA  : std_logic;	--WriteEnable
-	SIGNAL	CLKA  : std_logic;
-	SIGNAL	CLKB  : std_logic;
-	SIGNAL	D_out : std_logic_vector (7 downto 0);
-	SIGNAL	count_out: std_logic_vector (3 downto 0); 
-	SIGNAL	En: std_logic;
-	SIGNAL	Clock: std_logic;
-	SIGNAL	ResetGray: std_logic;
-        SIGNAL 	gray_in : STD_LOGIC_VECTOR(3 DOWNTO 0);
-        SIGNAL  bin_out : STD_LOGIC_VECTOR(3 DOWNTO 0);
-
+	SIGNAL write_valid_ptr : std_logic;
+	SIGNAL wr_ADDRA_ptr : std_logic_vector (2 DOWNTO 0);
+	SIGNAL read_valid_ptr : std_logic;
+	SIGNAL rd_ADDRB_ptr : std_logic_vector (2 DOWNTO 0);
 
 BEGIN
 
+fifoc : fifo_control PORT MAP ( 
+		reset => reset,
+		rdclk => rclk,
+		wrclk => wclk,
+		r_req => rreq,
+		w_req => wreq,
+		write_valid => write_valid_ptr,
+		read_valid => read_valid_ptr,
+		wr_ptr => wr_ADDRA_ptr,
+		rd_ptr => rd_ADDRB_ptr,
+		full => full,
+		empty => empty  );
 
+
+mem :memory PORT MAP (	
+		D_in => datain,
+		ADDRA => wr_ADDRA_ptr,
+		ADDRB => rd_ADDRB_ptr,
+		REA => read_valid_ptr,
+		WEA => write_valid_ptr,
+		CLKA => rclk,
+		CLKB => wclk,
+		D_out => dataout );
 
 
 
