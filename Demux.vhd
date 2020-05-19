@@ -1,11 +1,13 @@
+LIBRARY IEEE;
+USE IEEE.std_logic_1164.ALL;
  entity DeMux is
-    Port ( d_in : in  bit_VECTOR (7 downto 0);
-           d_out1 : OUT  bit_VECTOR (7 downto 0);
-           d_out2 : OUT bit_VECTOR (7 downto 0);
-           d_out3 : OUT bit_VECTOR (7 downto 0);
-           d_out4 : OUT bit_VECTOR (7 downto 0);
-           Sel : in  bit_VECTOR (1 downto 0);
-           En : in  bit);
+    Port ( d_in : in  STD_LOGIC_VECTOR (7 downto 0);
+           d_out1 : OUT  STD_LOGIC_VECTOR (7 downto 0);
+           d_out2 : OUT STD_LOGIC_VECTOR (7 downto 0);
+           d_out3 : OUT STD_LOGIC_VECTOR (7 downto 0);
+           d_out4 : OUT STD_LOGIC_VECTOR (7 downto 0);
+           Sel : in  STD_LOGIC_VECTOR (1 downto 0);
+           En : in  STD_LOGIC);
 end DeMux;
 
 architecture DeMuxArch of DeMux is
