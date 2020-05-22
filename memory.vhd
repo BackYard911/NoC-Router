@@ -1,6 +1,6 @@
-library IEEE;
-	use IEEE.std_logic_1164.all;
-	use IEEE.std_logic_unsigned.all;
+LIBRARY IEEE;
+	USE IEEE.std_logic_1164.ALL;
+	USE IEEE.std_logic_unsigned.ALL;
 
 ENTITY memory IS
 	GENERIC (
@@ -38,6 +38,8 @@ BEGIN
 		IF (rising_edge(CLKB)) THEN
 			IF (REA = '1') THEN
 				D_out <= mem(conv_integer(ADDRB));
+			ELSE
+				D_out <= (others=>'Z');
 			END IF;
 		END IF; 
 	END PROCESS;

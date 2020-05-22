@@ -1,29 +1,30 @@
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
 
 
 
-entity ib is
-    Port ( data_in : in  STD_LOGIC_VECTOR (7 downto 0);
-           clock : in  STD_LOGIC;
-           reset : in  STD_LOGIC;
-           clock_En : in  STD_LOGIC;
-           data_out : out  STD_LOGIC_VECTOR (7 downto 0));
-end ib;
+ENTITY ib IS
+    PORT ( data_in : IN  STD_LOGIC_VECTOR (7 DOWNTO 0);
+           clock : IN  STD_LOGIC;
+           reset : IN  STD_LOGIC;
+           clock_En : IN  STD_LOGIC;
+           data_out : OUT  STD_LOGIC_VECTOR (7 DOWNTO 0));
+END ib;
 
-architecture input_Buffer_Arch of ib is
+ARCHITECTURE input_Buffer_Arch OF ib IS
 
-begin
-    process(clock,reset)
-        begin
-            if reset = '1' then data_out <= "00000000";
-            elsif clock'event and clock = '1' then
-                if clock_En='1' then
+BEGIN
+    PROCESS(clock,reset)
+        BEGIN
+	IF rising_edge(clock) THEN
+            IF reset = '1' THEN data_out <= "00000000";
+	    
+    	    ELSIF clock_En='1' THEN
                     data_out <= data_in;
-                else
-                    null;
-            end if;
-            end if;
-        end process;
+            END IF;
+            
+            
+            END IF;
+        END PROCESS;
 
-end input_Buffer_Arch;
+END input_Buffer_Arch;

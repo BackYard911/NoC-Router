@@ -5,6 +5,7 @@ ENTITY rr_scheduler IS
     PORT (
         clock : IN STD_LOGIC;
         din1, din2, din3, din4 : IN STD_LOGIC_VECTOR (7 DOWNTO 0);
+	
         dout : OUT STD_LOGIC_VECTOR (7 DOWNTO 0)
     );
 
@@ -13,7 +14,9 @@ END ENTITY rr_scheduler;
 ARCHITECTURE behav OF rr_scheduler IS
     TYPE state_type IS (idle, port1, port2, port3, port4);
     SIGNAL current_state, next_state : state_type;
+
 BEGIN
+    
     cs : PROCESS (clock)
     BEGIN
         IF rising_edge(clock) THEN

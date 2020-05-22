@@ -1,30 +1,30 @@
-library ieee;
-	use ieee.std_logic_1164.all;
-	use ieee.std_logic_unsigned.all;
-entity Gray_counter is 
-	port (
-		count_out: out std_logic_vector (3 downto 0); 
-		En: in std_logic;
-		Clock: in std_logic;
-		Reset: in std_logic
+LIBRARY ieee;
+	USE ieee.std_logic_1164.all;
+	USE ieee.std_logic_unsigned.all;
+ENTITY Gray_counter IS 
+	PORT (
+		count_out: OUT std_logic_vector (3 DOWNTO 0); 
+		En: IN std_logic;
+		Clock: IN std_logic;
+		Reset: IN std_logic
 	      );
-end entity;
+END ENTITY;
 
-architecture rt1 of Gray_counter is 
-	signal count: std_logic_vector (3 downto 0);
-begin 
-	process (Clock, Reset) begin
-		if (Reset = '1') then 
+ARCHITECTURE rt1 OF Gray_counter IS 
+	SIGNAL count: std_logic_vector (3 DOWNTO 0);
+BEGIN 
+	PROCESS (Clock, Reset) BEGIN
+		IF (Reset = '1') THEN 
 			count <= (others=>'0');
-		elsif (rising_edge(Clock)) then 
-			if ( En = '1') then 
+		ELSIF (rising_edge(Clock)) THEN 
+			IF ( En = '1') THEN 
 				count <= count + 1;
-			end if;
-		end if;
-	end process;
+			END IF;
+		END IF;
+	END PROCESS;
 	Count_out  <= ( count (3) &
-			( count (3) xor count (2) ) &
-			( count (2) xor count (1) ) &
-			( count (1) xor count (0) ) );
-end architecture;
+			( count (3) XOR count (2) ) &
+			( count (2) XOR count (1) ) &
+			( count (1) XOR count (0) ) );
+END ARCHITECTURE;
 

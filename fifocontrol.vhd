@@ -73,7 +73,7 @@ BEGIN
             rd_valid <= '0';
             empty <= '1';
             wr_valid <= '1';
-        ELSE
+        ELSIF (reset = '0') THEN
             IF (status = '1') THEN
                 full <= '1';
                 wr_valid <= '0';
