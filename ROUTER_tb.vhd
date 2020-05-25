@@ -44,30 +44,35 @@ BEGIN
 	sg: PROCESS IS
 	BEGIN
 		rst <= '1';
-		WAIT FOR 40 ns;
-		rst <= '0';
-		wr1 <= '1';
 		datai1 <= "01000000";
 		WAIT FOR 80 ns;
---		wr3 <= '0';
---		rst <= '1';
-		datai2 <= "10000001";
-		wr2 <= '1';
-		WAIT FOR 580 ns;
---		wr1 <= '0';
-		rst <= '1';
-		wr1 <= '1';
-		WAIT FOR 320 ns;
 		rst <= '0';
-		datai3 <= "00100010";
-		wr3 <= '1';
-		WAIT FOR 80 ns;
---		wr2 <= '0';
-		datai4 <= "00010011";
-		wr4 <= '1';
+		
+		wr1 <= '1';
+		
+		--WAIT FOR 80 ns;
+		WAIT FOR 60 ns;
+		wr1 <= '0';
 
---		WAIT FOR 320 ns;
---		wr4 <= '0';
+-- --		wr3 <= '0';
+-- --		rst <= '1';
+-- 		datai2 <= "10000001";
+-- 		wr2 <= '1';
+-- 		WAIT FOR 580 ns;
+-- --		wr1 <= '0';
+-- 		rst <= '1';
+-- 		wr1 <= '1';
+-- 		WAIT FOR 320 ns;
+-- 		rst <= '0';
+-- 		datai3 <= "00100010";
+-- 		wr3 <= '1';
+-- 		WAIT FOR 80 ns;
+-- --		wr2 <= '0';
+-- 		datai4 <= "00010011";
+-- 		wr4 <= '1';
+
+-- --		WAIT FOR 320 ns;
+-- --		wr4 <= '0';
 
 
 		WAIT;

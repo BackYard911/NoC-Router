@@ -31,6 +31,7 @@ ARCHITECTURE behav OF fifo_controller IS
     SIGNAL wr_g2b : STD_LOGIC_VECTOR(3 DOWNTO 0);
     SIGNAL wr_binary_out : STD_LOGIC_VECTOR(3 DOWNTO 0);
     SIGNAL rd_valid, wr_valid : STD_LOGIC;
+    SIGNAL status : STD_LOGIC;
 
 BEGIN
 
@@ -61,45 +62,49 @@ BEGIN
         gray_in => wr_g2b,
         bin_out => wr_binary_out
     );
+    PROCESS (wr_binary_out, rd_binary_out)
 
-    ef : PROCESS (wr_binary_out, rd_binary_out, r_req, w_req, reset)
-        VARIABLE status_0, status_1, status : STD_LOGIC;
+        VARIABLE status_0, status_1 : STD_LOGIC;
     BEGIN
         status_0 := wr_binary_out(2) XNOR rd_binary_out(3);
         status_1 := wr_binary_out(3) XOR rd_binary_out(2);
-        status := status_0 AND status_1;
-        IF (reset = '1') THEN
-            full <= '0';
-            rd_valid <= '0';
-            empty <= '1';
-            wr_valid <= '1';
-        ELSIF (reset = '0') THEN
-            IF (status = '1') THEN
-                full <= '1';
-                wr_valid <= '0';
-            ELSE
+        status <= status_0 AND status_1;
+    END PROCESS;
+        ef : PROCESS (wr_binary_out, rd_binary_out, r_req, w_req, reset, wr_valid, rd_valid)
+	--ef : PROCESS (status ,reset)
+        BEGIN
+            IF (reset = '1') THEN
                 full <= '0';
-                IF (w_req = '1') THEN
-                    wr_valid <= '1';
-                ELSE
-                    wr_valid <= '0';
-                END IF;
-            END IF;
-            IF (wr_binary_out = rd_binary_out) THEN
-                empty <= '1';
                 rd_valid <= '0';
-            ELSE
-                empty <= '0';
-                IF (r_req = '1') THEN
-                    rd_valid <= '1';
+                empty <= '1';
+                wr_valid <= '1';
+            ELSIF (reset = '0') THEN
+                IF (status = '1') THEN
+                    full <= '1';
+                    wr_valid <= '0';
                 ELSE
+                    full <= '0';
+                    IF (w_req = '1') THEN
+                        wr_valid <= '1';
+                    ELSE
+                        wr_valid <= '0';
+                    END IF;
+                END IF;
+                IF (wr_binary_out = rd_binary_out) THEN
+                    empty <= '1';
                     rd_valid <= '0';
+                ELSE
+                    empty <= '0';
+                    IF (r_req = '1') THEN
+                        rd_valid <= '1';
+                    ELSE
+                        rd_valid <= '0';
+                    END IF;
                 END IF;
             END IF;
-        END IF;
-    END PROCESS ef;
-    write_valid <= wr_valid;
-    read_valid <= rd_valid;
-    wr_ptr <= wr_binary_out(2 DOWNTO 0);
-    rd_ptr <= rd_binary_out(2 DOWNTO 0);
-END ARCHITECTURE behav;
+        END PROCESS ef;
+        write_valid <= wr_valid;
+        read_valid <= rd_valid;
+        wr_ptr <= wr_binary_out(2 DOWNTO 0);
+        rd_ptr <= rd_binary_out(2 DOWNTO 0);
+    END ARCHITECTURE behav;

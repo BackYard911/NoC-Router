@@ -17,6 +17,7 @@ BEGIN
 		IF (Reset = '1') THEN 
 			count <= (others=>'0');
 		ELSIF (rising_edge(Clock)) THEN 
+			
 			IF ( En = '1') THEN 
 				count <= count + 1;
 			END IF;
