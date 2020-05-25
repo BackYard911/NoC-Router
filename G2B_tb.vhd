@@ -24,22 +24,22 @@ begin
    -- stimulus process
    stim_proc: process
    begin        
-        gin <= "0000";    wait for 20 ns;
-        gin <= "0001";  wait for 20 ns;
-        gin <= "0010";  wait for 20 ns;
-        gin <= "0011";  wait for 20 ns;
-        gin <= "0100";    wait for 20 ns;
-        gin <= "0101";  wait for 20 ns;
-        gin <= "0110";  wait for 20 ns;
-        gin <= "0111";  wait for 20 ns;
-        gin <= "1000";    wait for 20 ns;
-        gin <= "1001";  wait for 20 ns;
-        gin <= "1010";  wait for 20 ns;
-        gin <= "1011";  wait for 20 ns;
-        gin <= "1100";    wait for 20 ns;
-        gin <= "1101";  wait for 20 ns;
-        gin <= "1110";  wait for 20 ns;
-        gin <= "1111";  wait for 20 ns;     
+        gin <= "0000";    wait for 40 ns;
+        gin <= "0001";  wait for 40 ns;
+        gin <= "0011";  wait for 40 ns;
+        gin <= "0010";  wait for 40 ns;
+        gin <= "0110";    wait for 40 ns;
+        gin <= "0111";  wait for 40 ns;
+        gin <= "0101";  wait for 40 ns;
+        gin <= "0100";  wait for 40 ns;
+        gin <= "1100";    wait for 40 ns;
+        gin <= "1101";  wait for 40 ns;
+        gin <= "1111";  wait for 40 ns;
+        gin <= "1110";  wait for 40 ns;
+        gin <= "1010";    wait for 40 ns;
+        gin <= "1011";  wait for 40 ns;
+        gin <= "1001";  wait for 40 ns;
+        gin <= "1000";  wait for 40 ns;     
       wait;
    end process;
 

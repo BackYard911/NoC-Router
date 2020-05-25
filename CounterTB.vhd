@@ -19,22 +19,22 @@ BEGIN
   Clock_proc: PROCESS
   BEGIN
     Clock_s <= '1';
-    WAIT FOR 10 ns;
+    WAIT FOR 40 ns;
     Clock_s <= '0';
-    WAIT FOR 10 ns;
-  END PROCESS clock_proc;
+    WAIT FOR 40 ns;
+  END PROCESS Clock_proc;
                       
   Vector_proc: PROCESS
   BEGIN
     Reset_s <= '1';
     WAIT UNTIL Clock_s='1' AND Clock_s'EVENT;
-    WAIT FOR 3 NS;
+    WAIT FOR 40 NS;
     Reset_s <= '0';
     En_s <= '1';
     FOR index IN 0 To 3 LOOP
       WAIT UNTIL Clock_s='1' AND Clock_s'EVENT;
     END LOOP;
-    WAIT FOR 3 NS;
+    WAIT FOR 80 NS;
     WAIT;
   END PROCESS Vector_proc;
 
