@@ -75,7 +75,7 @@ BEGIN
 
                 flag(i, j) <= '1' WHEN (to_integer(unsigned(datain(j)(1 DOWNTO 0))) = i) ELSE
                 '0';
-                rdreq(i, j) <= '1'WHEN ( empty(i, j)= '0' AND flag_r = i) ELSE '0';
+                rdreq(i, j) <= '1'WHEN ( empty(i, j)= '0' AND flag_r = j) ELSE '0';
                 wreq(i, j) <= (NOT full(i, j)) AND wr(j) AND flag(i, j);
 
                 fifo_8 : ENTITY work.fifo_8 PORT MAP (rst, rclock, wclock, rdreq(i, j), fifowr(i, j), DEMUX_out(j, i), data_out(i, j), empty(i, j), full(i, j));
